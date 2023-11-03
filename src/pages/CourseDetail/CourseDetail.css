@@ -1,0 +1,27 @@
+.course-detail {
+  .course-detail--parent {
+    padding: 1rem 3rem;
+    display: flex;
+    /* justify-content: space-between; */
+    gap: 2rem;
+
+    .course-detail--left {
+      padding: 1.35rem;
+      border-radius: 0.5rem;
+      background: aliceblue;
+    }
+
+    .course-detail--right {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      flex-wrap: wrap;
+
+      .course-detail--cards {
+        border-radius: 0.3rem;
+        padding: 1.35rem;
+        background: lightblue;
+      }
+    }
+  }
+}

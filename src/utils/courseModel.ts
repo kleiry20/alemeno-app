@@ -1,31 +1,25 @@
 export type courseModel = {
-  id: number;
+  id: string;
   name: string;
-  instructor: string; // Name of the course instructor
+  instructor: string;
   description: string;
   enrollmentStatus: string; // Can be 'Open', 'Closed', or 'In Progress'
   thumbnail: string; //Link to the course thumbnail
-  duration: string; // Duration of the course
+  duration: string;
   schedule: string;
   location: string;
   prerequisites: [string];
   syllabus: [
     {
-      week: number;
-      topic: string;
-      content: string;
-    },
-    {
-      week: number;
+      week: string;
       topic: string;
       content: string;
     }
     // Additional weeks and topics...
   ];
   students: [
-    {},
     {
-      id: number;
+      id: string;
       name: string;
       email: string;
     }

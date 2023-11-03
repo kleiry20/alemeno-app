@@ -1,15 +1,21 @@
 .course-listing {
-  padding: 2rem;
+  .course-listing--dashboard {
+    display: flex;
+    padding: 2rem 4rem 2rem 2rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
 
-  .select-btn {
-    border: 1px solid gray;
-    border-radius: 0.25rem;
-    background-color: powderblue;
-    color: black;
-    cursor: pointer;
-    padding: 0.3rem 0.5rem;
+  .course-listing--table {
+    padding: 2rem;
+
+    .select-btn {
+      border: 1px solid gray;
+      border-radius: 0.25rem;
+      background-color: powderblue;
+      color: black;
+      cursor: pointer;
+      padding: 0.3rem 0.5rem;
+    }
   }
 }
-/* "overrides": {
-  "typescript": "^5.0.2"
-}, */
