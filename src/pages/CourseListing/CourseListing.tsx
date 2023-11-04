@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { courseModel } from "../../utils/courseModel";
 import "./CourseListing.css";
-import { Space, Table, Input, Button } from "antd";
+import { Table, Button } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -37,7 +37,8 @@ const CourseListing = () => {
     if (courseList === undefined || courseList[0].location === "-1") {
       fetchData();
     }
-  }, [courseList, dispatch]);
+  }, []);
+  // [courseList, dispatch]
 
   const columns: ColumnsType<DataType> = [
     {
@@ -45,7 +46,6 @@ const CourseListing = () => {
       dataIndex: "id",
       key: "id",
       render: (text, record: any) => (
-        // <a onClick={() => navigate(`/course-detail/${record.id}`)}>{text}</a>
         <Link to={`/course-detail/${record.id}`}>{text}</Link>
       ),
       responsive: ["xs", "sm", "md", "lg"],
@@ -80,7 +80,6 @@ const CourseListing = () => {
           Go to Dashboard
         </Button>
       </div>
-      {/* <div style={{ display: "flex", flexWrap: "wrap" }}></div> */}
       <Table
         className="course-listing--table"
         columns={columns}

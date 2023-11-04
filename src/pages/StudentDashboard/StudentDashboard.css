@@ -4,5 +4,23 @@
   }
   .student-courses {
     padding: 2rem;
+
+    .student-course-div {
+      display: flex;
+      gap: 2rem;
+      .student-course-details {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        padding: 1.35rem;
+        border-radius: 0.5rem;
+        background: aliceblue;
+        width: 40%;
+
+        .p-style {
+          font-weight: 600;
+        }
+      }
+    }
   }
 }

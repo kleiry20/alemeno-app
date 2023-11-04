@@ -6,7 +6,7 @@ interface StudentModel {
 }
 
 const initialState: StudentModel = {
-  value: [{ id: "", name: "", email: "", enrolledCourses: [""] }],
+  value: [{ id: "", name: "", email: "", enrolledCourses: [{ courseId: "" }] }],
 };
 
 const studentSlice = createSlice({

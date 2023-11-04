@@ -1,12 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { studentModel } from "../../utils/studentModel";
+import { loginModel } from "./loginModel";
 
 interface StudentModel {
-  value: studentModel;
+  value: loginModel;
 }
 
 const initialState: StudentModel = {
-  value: { id: "", name: "", email: "", enrolledCourses: [""] },
+  // value: { id: "", name: "", email: "", enrolledCourses: [""] },
+  value: { email: "", isLoggedIn: false },
 };
 
 const loggedInStudentSlice = createSlice({
@@ -14,7 +16,12 @@ const loggedInStudentSlice = createSlice({
   initialState,
   reducers: {
     loggedInStudent: (state, action) => {
-      state.value = action.payload;
+      // state.value = action.payload;
+      state.value = {
+        ...state.value,
+        ...action.payload,
+        isLoggedIn: true,
+      };
     },
   },
 });

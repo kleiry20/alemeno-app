@@ -1,78 +1,68 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../components/Header/Header";
-import { useSelector, useDispatch } from "react-redux";
-import { setStudent } from "../../features/student/studentSlice";
+import { useSelector } from "react-redux";
 import "./StudentDashboard.css";
-import { getMap } from "../../features/studentCourseMapSlice";
 
 const StudentDashboard = () => {
-  const dispatch = useDispatch();
+  const displayData = [
+    {
+      coursename: "",
+      instructorName: "",
+      thumbnail: "",
+      // dueDate: "",
+      // progressBar: "",
+    },
+  ];
 
   const courseList = useSelector((state: any) => state.course.value);
-  const studentList = useSelector((state: any) => state.student.value);
-  const enrolledCourses = useSelector(
-    (state: any) => state.studentCourseMap.value
+
+  const currentStudent = useSelector(
+    (state: any) => state.loggedInStudent.value
   );
 
-  const fetchStudentData = async () => {
-    try {
-      const response = await fetch(
-        "https://alemeno-assignment-63310-default-rtdb.firebaseio.com/students.json"
-      );
-      if (response.ok) {
-        const data = await response.json();
-        dispatch(setStudent(data));
-      } else {
-        throw new Error("Failed to fetch data from the API");
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  // useEffect(() => {
-  //   // if (courseList === undefined || courseList.length === 0) {
-  //   //   fetchStudentData();
-  //   // }
-  //   fetchStudentData();
-  //   console.log("studentList", studentList);
-  // }, []);
+  function filterCourses() {
+    if (currentStudent !== undefined) {
+      currentStudent.enrolledCourses.map((mapCourse: any) => {
+        courseList.map((courseItem: any) => {
+          if (courseItem.id === parseInt(mapCourse.courseId, 10)) {
+            console.log("matchhhhhhhh", courseItem.id, mapCourse.courseId);
+            // setDetails((prevState) => {
+            //   return {
+            //     ...prevState,
+            //     coursename: courseItem.name,
+            //   };
+            // });
 
-  // to get the enrolled courses by a student
-  const fetchEnrolledCourses = async () => {
-    try {
-      const response = await fetch(
-        "https://alemeno-assignment-63310-default-rtdb.firebaseio.com/user-course-map.json"
-      );
-      if (response.ok) {
-        const data = await response.json();
-        dispatch(getMap(data));
-      } else {
-        throw new Error("Failed to fetch data from the API");
-      }
-    } catch (error) {
-      console.error(error);
+            displayData.push({
+              ...displayData,
+              coursename: courseItem.name,
+              instructorName: courseItem.instructor,
+              thumbnail: courseItem.thumbnail,
+            });
+          }
+          return 0;
+        });
+        return 0;
+      });
     }
-  };
-  useEffect(() => {
-    fetchEnrolledCourses();
-    fetchStudentData();
-  }, []);
+  }
+  filterCourses();
 
-  console.log("enrolledCourses", enrolledCourses);
+  const filteredDisplayData = displayData.filter((item) => {
+    return (
+      item.coursename !== "" ||
+      item.instructorName !== "" ||
+      item.thumbnail !== ""
+    );
+  });
 
   return (
     <div className="student">
       <Header />
       <div className="student-info">
         <h4 style={{ fontWeight: "bold" }}>Your Info</h4>
-        {studentList.map((student: any) => {
-          return (
-            <>
-              <p>{student.name}</p>
-              <p>{student.email}</p>
-            </>
-          );
-        })}
+        <p>{currentStudent.name}</p>
+        <p>{currentStudent.email}</p>
       </div>
 
       <div className="student-courses">
@@ -80,6 +70,22 @@ const StudentDashboard = () => {
         {/* coursename, instructor name, thumbnail, due date, and a progress bar */}
         {/* mark course as completed */}
         <h4 style={{ fontWeight: "bold" }}>List of Enrolled Courses</h4>
+        <div className="student-course-div">
+          {filteredDisplayData.map((item) => {
+            console.log("filteredDisplayData", filteredDisplayData);
+            return (
+              <div className="student-course-details">
+                <p className="p-style">
+                  Course - <span>{item.coursename}</span>
+                </p>
+                <p className="p-style">
+                  Instructor - <span>{item.instructorName}</span>
+                </p>
+                <p>{item.thumbnail}</p>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

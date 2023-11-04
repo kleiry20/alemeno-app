@@ -9,6 +9,7 @@
       padding: 1.35rem;
       border-radius: 0.5rem;
       background: aliceblue;
+      width: 70%;
     }
 
     .course-detail--right {
@@ -16,6 +17,7 @@
       flex-direction: column;
       gap: 2rem;
       flex-wrap: wrap;
+      width: 30%;
 
       .course-detail--cards {
         border-radius: 0.3rem;

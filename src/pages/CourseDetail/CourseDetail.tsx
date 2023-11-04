@@ -8,19 +8,10 @@ import "./CourseDetail.css";
 const CourseDetail = () => {
   const navigate = useNavigate();
 
-  // const { id } = useParams();
-
   const { id } = useParams<{ id: string }>();
 
   const courseList = useSelector((state: any) => state.course.value);
-  // let course: any = {};
-  // if (id !== undefined) {
-  //   course = courseList.find((element: any) => {
-  //     return element.id === parseInt(id);
-  //   });
-  // }
 
-  // Use the 'id' to fetch and display details for the specific item
   if (id === undefined) {
     return <div>Item not found.</div>;
   }
@@ -43,41 +34,6 @@ const CourseDetail = () => {
         <Header />
         <h2 style={{ padding: "1rem 3rem" }}>Course Detail</h2>
 
-        {/* {Object.entries(item).map(([key, value]) => (
-          <div key={key}>
-            <h2>{key}</h2>
-
-            {key === "prerequisites" ? (
-              <ul>
-                {(value as string[]).map(
-                  (prerequisite: string, index: number) => (
-                    <li key={index}>{prerequisite}</li>
-                  )
-                )}
-              </ul>
-            ) : key === "syllabus" ? (
-              <ul>
-                {(value as any[]).map((entry: any, index: number) => (
-                  <li key={index}>
-                    Week: {entry.week}, Topic: {entry.topic}, Content:{" "}
-                    {entry.content}
-                  </li>
-                ))}
-              </ul>
-            ) : key === "students" ? (
-              <ul>
-                {(value as any[]).map((student: any, index: number) => (
-                  <li key={index}>
-                    Student ID: {student.id}, Name: {student.name}, Email:{" "}
-                    {student.email}
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p>{value as string}</p>
-            )}
-          </div>
-        ))} */}
         <div className="course-detail--parent">
           <div className="course-detail--left">
             <h3 style={{ marginBottom: "1.2rem" }}>Course Basic Information</h3>

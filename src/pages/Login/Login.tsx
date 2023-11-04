@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Login.css";
-import { Button, Input } from "antd";
+import { Input } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { setStudent } from "../../features/student/studentSlice";
 import { useNavigate } from "react-router-dom";
@@ -16,6 +16,7 @@ const Login = () => {
 
   const studentList = useSelector((state: any) => state.student.value);
 
+  //   check if user is present in db
   const fetchStudentData = async () => {
     try {
       const response = await fetch(
@@ -42,7 +43,6 @@ const Login = () => {
       (item: any) => item.email === loginData.email
     );
     if (item !== undefined) {
-      console.log("logged in");
       dispatch(loggedInStudent(item));
       navigate("/");
     } else {
